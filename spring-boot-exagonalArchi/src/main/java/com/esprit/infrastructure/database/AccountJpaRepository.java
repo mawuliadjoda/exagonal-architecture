@@ -1,4 +1,4 @@
-package com.esprit.domain.infrastructure.database;
+package com.esprit.infrastructure.database;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

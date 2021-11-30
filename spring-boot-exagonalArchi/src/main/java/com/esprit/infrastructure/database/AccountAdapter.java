@@ -1,4 +1,4 @@
-package com.esprit.domain.infrastructure.database;
+package com.esprit.infrastructure.database;
 
 import java.util.List;
 import java.util.stream.Collectors;

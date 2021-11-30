@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.esprit.domain.entities.Account;
-import com.esprit.domain.infrastructure.database.AccountAdapter;
 import com.esprit.domain.use_cases.AccountService;
+import com.esprit.infrastructure.database.AccountAdapter;
 
 @RestController
 @RequestMapping("/accounts")
