@@ -12,6 +12,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 
 import com.bank.domain.entities.Account;
 import com.bank.domain.use_cases.AccountService;
+import com.bank.domain.use_cases.BankAccountException;
 import com.bank.domain.use_cases.OperationService;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -34,7 +35,7 @@ class AccountTesting {
 
 	@Test
 	@Order(1)
-	void when_deposit_amount_shouldPositive_account() {
+	void when_deposit_amount_shouldPositive_account() throws BankAccountException {
 		double amount = 100;
 		long accountNumber = 123;
 
@@ -46,7 +47,7 @@ class AccountTesting {
 
 	@Test
 	@Order(2)
-	void when_withdraw_amount_should_positive() {
+	void when_withdraw_amount_should_positive() throws BankAccountException {
 		double amount = 75;
 		long accountNumber = 123;
 

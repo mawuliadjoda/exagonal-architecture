@@ -5,11 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.springframework.stereotype.Component;
-
 import com.bank.domain.entities.Account;
 
-@Component
+//@Component
 public class AccountService implements AccountPort {
 
 	private OperationService operationService;
@@ -24,7 +22,12 @@ public class AccountService implements AccountPort {
 		map.put(account.getAccountNumber(), account);
 	}
 
-	public void deposit(long accountNumber, double amount) {
+	public void deposit(long accountNumber, double amount) throws BankAccountException  {
+
+		if (amount < 0) {
+			throw new BankAccountException("the amount to deposit must be positive");
+		}
+
 		Account account = retrieveAccount(accountNumber);
 		account.setBalance(account.getBalance() + amount);
 
@@ -36,15 +39,23 @@ public class AccountService implements AccountPort {
 		return map.get(accountNumber);
 	}
 
-	public void withdraw(long accountNumber, double amount) {
-		Account account = retrieveAccount(accountNumber);
-		account.setBalance(account.getBalance() - amount);
+	public void withdraw(long accountNumber, double amount)  throws BankAccountException {
+		if (amount < 0) {
+			throw new BankAccountException("the amount to deposit must be positive");
+		}
 
+		Account account = retrieveAccount(accountNumber);
+
+		if (account.getBalance() < amount) {
+			throw new BankAccountException(
+					String.format("operation refused, insufficient fund for %s.", account.getAccountNumber()));
+		}
+		account.setBalance(account.getBalance() - amount);
 		saveAccount(account);
 
 		operationService.saveOperation(account, WITHDRAW, amount);
 	}
-	
+
 	public List<Account> getAllAccount() {
 		return map.values().stream().collect(Collectors.toList());
 	}
