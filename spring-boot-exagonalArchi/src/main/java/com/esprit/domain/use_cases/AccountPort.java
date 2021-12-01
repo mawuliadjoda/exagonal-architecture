@@ -5,11 +5,8 @@ import java.util.List;
 import com.esprit.domain.entities.Account;
 
 public interface AccountPort {
-	void deposit(Long accountNumber, double amount);
 
-	void withdraw(Long accountNumber, double amount);
-
-	void saveAccount(Account account);
+	Account saveAccount(Account account);
 
 	Account retrieve(Long accountNumber);
 	

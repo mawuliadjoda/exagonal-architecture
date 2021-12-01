@@ -15,29 +15,9 @@ public class AccountAdapter implements AccountPort {
 	private AccountJpaRepository repository;
 
 	@Override
-	public void deposit(Long accountNumber, double amount) {
-		Account account = retrieve(accountNumber);
-		
-		if (account.getBalance() == null) {
-			account.setBalance(amount);
-		}
-		account.setBalance(account.getBalance() + amount);
-		saveAccount(account);
-	}
-
-	@Override
-	public void withdraw(Long accountNumber, double amount) {
-		Account account = retrieve(accountNumber);
-		if (account.getBalance() > amount) {
-			account.setBalance(account.getBalance() - amount);
-		}
-		
-		saveAccount(account);
-	}
-
-	@Override
-	public void saveAccount(Account account) {
-		repository.save(toAccountJpa(account));
+	public Account saveAccount(Account account) {
+		AccountJpa accountJpa = repository.save(toAccountJpa(account));
+		return toAccount(accountJpa);
 	}
 
 	@Override
@@ -47,10 +27,7 @@ public class AccountAdapter implements AccountPort {
 
 	@Override
 	public List<Account> getAll() {
-		return repository.findAll()
-				         .stream()
-				         .map(this::toAccount)
-				         .collect(Collectors.toList());
+		return repository.findAll().stream().map(this::toAccount).collect(Collectors.toList());
 	}
 
 	private AccountJpa toAccountJpa(Account account) {
