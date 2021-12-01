@@ -23,7 +23,7 @@ class AccountServiceTest {
 	AccountPort accountPort;
 
 	@Test
-	void deposit() throws BankAccountException {
+	void when_deposit_amount_shouldPositive_account() throws BankAccountException {
 		Account account = new Account();
 		long accountNumber = 12345;
 		account.setAccountNumber(accountNumber);
@@ -40,7 +40,7 @@ class AccountServiceTest {
 	}
 	
 	@Test
-	void withdraw() throws BankAccountException {
+	void when_withdraw_amount_shouldPositive_account() throws BankAccountException {
 		Account account = new Account();
 		long accountNumber = 12345;
 		account.setAccountNumber(accountNumber);

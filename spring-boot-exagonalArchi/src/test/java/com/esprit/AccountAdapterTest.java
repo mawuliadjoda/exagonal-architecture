@@ -26,7 +26,7 @@ class AccountAdapterTest {
 	AccountJpaRepository accountJpaRepository;
 
 	@Test
-	void getAll() {
+	void find_all_return_record() {
 		AccountJpa accountJpa = new AccountJpa();
 		long accountNumber = 12345;
 		accountJpa.setAccountNumber(accountNumber);
@@ -42,7 +42,7 @@ class AccountAdapterTest {
 	}
 	
 	@Test
-	void retrieveAccount() {
+	void retrieveAccoun_should_return_an_account() {
 		AccountJpa accountJpa = new AccountJpa();
 		long accountNumber = 12345;
 		accountJpa.setAccountNumber(accountNumber);
